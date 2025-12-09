@@ -1,20 +1,13 @@
+use crate::prelude::*;
 use std::{
   cmp::Reverse,
   collections::{HashMap, HashSet},
 };
 
-use aoc::prelude::*;
-
-solution! {
-  year: 2025,
-  day: 8,
-  parse,
-  part_1: |input| part_1(input, 1000),
-  part_2,
-}
+solution!(day = 8);
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
-struct Point {
+pub struct Point {
   x: u32,
   y: u32,
   z: u32,
@@ -96,6 +89,7 @@ impl Point {
   }
 }
 
+#[parser]
 fn parse(input: &str) -> Vec<Point> {
   use parse::*;
 
@@ -107,6 +101,7 @@ fn parse(input: &str) -> Vec<Point> {
   )
 }
 
+#[solver(part = 1, args = [1000])]
 fn part_1(points: Vec<Point>, connections: usize) -> usize {
   let mut graph = JunctionGraph::new();
   for &(p1, p2) in sorted_edges(&points).iter().take(connections) {
@@ -118,6 +113,7 @@ fn part_1(points: Vec<Point>, connections: usize) -> usize {
   networks.into_iter().take(3).map(|net| net.len()).product()
 }
 
+#[solver(part = 2)]
 fn part_2(points: Vec<Point>) -> u32 {
   let mut graph = JunctionGraph::new();
   for (p1, p2) in sorted_edges(&points) {

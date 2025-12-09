@@ -1,14 +1,7 @@
+use crate::prelude::{parse::*, *};
 use std::str::Lines;
 
-use aoc::prelude::{parse::*, *};
-
-solution! {
-  year: 2025,
-  day: 6,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 6);
 
 enum Op {
   Add,
@@ -45,6 +38,7 @@ impl Op {
   }
 }
 
+#[solver(part = 1)]
 fn part_1(input: String) -> u64 {
   let (rows, ops) = input.parse_full(separated_pair(
     separated_list1(
@@ -64,6 +58,7 @@ fn part_1(input: String) -> u64 {
   sum
 }
 
+#[allow(clippy::new_instead_of_clear)]
 fn collect_vertical_problems(lines: Lines) -> Vec<Vec<u64>> {
   let cols = lines
     .map(|line| line.chars().collect())
@@ -85,6 +80,7 @@ fn collect_vertical_problems(lines: Lines) -> Vec<Vec<u64>> {
   problems
 }
 
+#[solver(part = 2)]
 fn part_2(input: String) -> u64 {
   let mut lines = input.trim().lines();
   let ops = lines
@@ -116,11 +112,11 @@ mod tests {
 
   #[test]
   fn test_part1() {
-    assert_eq!(part_1(parse(SAMPLE_INPUT)), 4277556);
+    assert_eq!(part_1(SAMPLE_INPUT.to_string()), 4277556);
   }
 
   #[test]
   fn test_part2() {
-    assert_eq!(part_2(parse(SAMPLE_INPUT)), 3263827);
+    assert_eq!(part_2(SAMPLE_INPUT.to_string()), 3263827);
   }
 }

@@ -1,21 +1,17 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 use interval::prelude::*;
 use std::collections::BTreeMap;
 
-solution! {
-  year: 2025,
-  day: 9,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 9);
 
+#[parser]
 fn parse(input: &str) -> Vec<(u64, u64)> {
   use parse::*;
 
   input.parse_lines(separated_pair(u64, tag(","), u64))
 }
 
+#[solver(part = 1)]
 fn part_1(points: Vec<(u64, u64)>) -> u64 {
   let mut max = 0;
   for (i, &(x1, y1)) in points.iter().enumerate() {
@@ -72,6 +68,7 @@ fn has_overlap(
   false
 }
 
+#[solver(part = 2)]
 fn part_2(points: Vec<(u64, u64)>) -> u64 {
   let mut horizontal_lines: BTreeMap<u64, IntervalSet<u64>> = BTreeMap::new();
   let mut vertical_lines: BTreeMap<u64, IntervalSet<u64>> = BTreeMap::new();

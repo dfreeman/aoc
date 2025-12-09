@@ -1,17 +1,12 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 use itertools::Itertools;
 use microlp::{ComparisonOp, OptimizationDirection, Problem};
 
-solution! {
-  year: 2025,
-  day: 10,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 10);
 
 type Parsed = Vec<(Vec<char>, Vec<Vec<u64>>, Vec<u64>)>;
 
+#[parser]
 fn parse(input: &str) -> Parsed {
   use parse::*;
 
@@ -45,6 +40,7 @@ fn button_to_u64(button: &[u64], total_lights: u64) -> u64 {
     .fold(0u64, |acc, &idx| acc | (1 << (total_lights - idx - 1)))
 }
 
+#[solver(part = 1)]
 fn part_1(input: Parsed) -> u64 {
   let mut sum = 0;
   'machines: for (lights, buttons, _) in input {
@@ -67,6 +63,7 @@ fn part_1(input: Parsed) -> u64 {
   sum
 }
 
+#[solver(part = 2)]
 fn part_2(input: Parsed) -> u64 {
   let mut sum = 0;
   for (_, buttons, target_joltages) in input {

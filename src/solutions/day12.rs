@@ -1,17 +1,12 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 use itertools::Itertools;
 use std::collections::HashMap;
 
-solution! {
-  year: 2025,
-  day: 12,
-  parse,
-  part_1,
-  part_2: |_| 0,
-}
+solution!(day = 12);
 
 type Parsed = (Vec<(u64, Vec<Vec<u8>>)>, Vec<((u64, u64), Vec<u64>)>);
 
+#[parser]
 fn parse(input: &str) -> Parsed {
   use parse::*;
 
@@ -36,6 +31,7 @@ fn parse(input: &str) -> Parsed {
   ))
 }
 
+#[solver(part = 1)]
 fn part_1((shapes, regions): Parsed) -> u64 {
   let shapes = HashMap::<_, _>::from_iter(shapes);
   let sizes = shapes

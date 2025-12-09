@@ -1,8 +1,7 @@
-use core::panic;
-
 pub use crate::exts::*;
-pub use crate::solution;
+pub use crate::{parser, solution, solver};
 
+#[allow(unused_imports)]
 pub mod parse {
   pub use nom::Parser;
   pub use nom::branch::alt;
@@ -12,16 +11,4 @@ pub mod parse {
   pub use nom::character::complete::{none_of, one_of};
   pub use nom::multi::{many0, many1, separated_list0, separated_list1};
   pub use nom::sequence::{delimited, pair, separated_pair};
-}
-
-pub fn part_1(_: String) -> usize {
-  panic!("Part 1 not implemented");
-}
-
-pub fn part_2(_: String) -> usize {
-  panic!("Part 2 not implemented");
-}
-
-pub fn parse(input: &str) -> String {
-  input.to_string()
 }

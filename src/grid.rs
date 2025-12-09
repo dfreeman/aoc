@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use std::{
   hash::Hash,
   ops::{Deref, Index, IndexMut},

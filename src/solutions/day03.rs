@@ -1,14 +1,9 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 use std::ops::RangeBounds;
 
-solution! {
-  year: 2025,
-  day: 3,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 3);
 
+#[parser]
 fn parse(input: &str) -> Vec<Vec<u64>> {
   input.parse_char_grid().map_2d(|c| c as u64 - '0' as u64)
 }
@@ -38,6 +33,7 @@ fn max_in<T: Ord>(els: &[T], range: impl RangeBounds<usize>) -> (usize, &T) {
     .expect("max_in called with an empty Vec")
 }
 
+#[solver(part = 1)]
 fn part_1(input: Vec<Vec<u64>>) -> u64 {
   let mut sum = 0;
   for row in input {
@@ -48,6 +44,7 @@ fn part_1(input: Vec<Vec<u64>>) -> u64 {
   sum
 }
 
+#[solver(part = 2)]
 fn part_2(input: Vec<Vec<u64>>) -> u64 {
   let mut sum = 0;
   for row in input {

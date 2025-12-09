@@ -1,13 +1,8 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 
-solution! {
-  year: 2025,
-  day: 2,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 2);
 
+#[parser]
 fn parse(input: &str) -> Vec<(u64, u64)> {
   use parse::*;
 
@@ -17,7 +12,8 @@ fn parse(input: &str) -> Vec<(u64, u64)> {
   ))
 }
 
-/// "Oh cool, I can just do this with math!"
+// "Oh cool, I can just do this with math!"
+#[solver(part = 1)]
 fn part_1(input: Vec<(u64, u64)>) -> u64 {
   input
     .iter()
@@ -63,6 +59,7 @@ fn split(n: u64, parts: u32) -> Option<Vec<u64>> {
 }
 
 /// "...actually, brute force is sounding pretty good right now."
+#[solver(part = 2)]
 fn part_2(input: Vec<(u64, u64)>) -> u64 {
   input
     .iter()

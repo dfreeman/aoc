@@ -1,16 +1,9 @@
-use aoc::{
-  grid::{Direction, Grid, GridCell},
-  prelude::*,
-};
+use crate::grid::{Direction, Grid, GridCell};
+use crate::prelude::*;
 
-solution! {
-  year: 2025,
-  day: 4,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 4);
 
+#[parser]
 fn parse(input: &str) -> Grid<bool> {
   Grid::new(input.parse_char_grid().map_2d(|c| c == '@'))
 }
@@ -26,6 +19,7 @@ fn occupied_neighbours(cell: &GridCell<bool>) -> usize {
     .count()
 }
 
+#[solver(part = 1)]
 fn part_1(grid: Grid<bool>) -> usize {
   grid
     .cells()
@@ -33,6 +27,7 @@ fn part_1(grid: Grid<bool>) -> usize {
     .count()
 }
 
+#[solver(part = 2)]
 fn part_2(grid: Grid<bool>) -> u64 {
   let mut grid = grid.clone();
   let mut count = 0;

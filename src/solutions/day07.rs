@@ -1,17 +1,9 @@
+use crate::grid::{Direction, Grid};
+use crate::prelude::*;
+
+solution!(day = 7);
+
 use std::cell::Cell;
-
-use aoc::{
-  grid::{Direction, Grid},
-  prelude::*,
-};
-
-solution! {
-  year: 2025,
-  day: 7,
-  parse,
-  part_1,
-  part_2,
-}
 
 struct QuantumNonsense {
   is_splitter: bool,
@@ -38,12 +30,14 @@ impl QuantumNonsense {
 
 type Layout = (isize, Grid<bool>);
 
+#[parser]
 fn parse(input: &str) -> Layout {
   let start = input.find('S').expect("should have a starting position");
   let grid = Grid::new(input.parse_char_grid().map_2d(|c| c == '^'));
   (start as isize, grid)
 }
 
+#[solver(part = 1)]
 fn part_1((start, grid): Layout) -> u64 {
   let mut splits = 0;
   let mut cells = vec![grid.cell((0, start))];
@@ -69,6 +63,7 @@ fn part_1((start, grid): Layout) -> u64 {
   splits
 }
 
+#[solver(part = 2)]
 fn part_2((start, grid): Layout) -> u64 {
   let grid = grid.map(|c| QuantumNonsense::new(*c));
 

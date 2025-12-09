@@ -1,15 +1,10 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 
-solution! {
-  year: 2025,
-  day: 5,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 5);
 
 type Parsed = (Vec<(u64, u64)>, Vec<u64>);
 
+#[parser]
 fn parse(input: &str) -> Parsed {
   use parse::*;
 
@@ -20,6 +15,7 @@ fn parse(input: &str) -> Parsed {
   ))
 }
 
+#[solver(part = 1)]
 fn part_1((ranges, ids): Parsed) -> usize {
   ids
     .iter()
@@ -31,9 +27,10 @@ fn part_1((ranges, ids): Parsed) -> usize {
     .count()
 }
 
+#[solver(part = 2)]
 fn part_2((mut ranges, _): Parsed) -> u64 {
   // Sorting ensures any ranges that full subsume others are processed first
-  ranges.sort_by(|&a, &b| (b.1 - b.0).cmp(&(a.1 - a.0)));
+  ranges.sort_by_key(|&a| std::cmp::Reverse(a.1 - a.0));
 
   let mut intervals = Vec::new();
   for &(mut start, mut end) in &ranges {

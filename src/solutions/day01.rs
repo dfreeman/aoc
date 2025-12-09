@@ -1,15 +1,9 @@
-use aoc::prelude::*;
+use crate::prelude::*;
 
-solution! {
-  year: 2025,
-  day: 1,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 1);
 
 #[derive(Debug, Clone, Copy)]
-enum Dir {
+pub enum Dir {
   Left,
   Right,
 }
@@ -23,6 +17,7 @@ impl Dir {
   }
 }
 
+#[parser]
 fn parse(input: &str) -> Vec<(Dir, i32)> {
   use parse::*;
 
@@ -33,6 +28,7 @@ fn parse(input: &str) -> Vec<(Dir, i32)> {
   input.parse_lines(pair(dir, i32))
 }
 
+#[solver(part = 1)]
 fn part_1(input: Vec<(Dir, i32)>) -> i32 {
   let mut zeroes: i32 = 0;
   let mut position: i32 = 50;
@@ -46,6 +42,7 @@ fn part_1(input: Vec<(Dir, i32)>) -> i32 {
   zeroes
 }
 
+#[solver(part = 2)]
 fn part_2(input: Vec<(Dir, i32)>) -> i32 {
   let mut zeroes: i32 = 0;
   let mut position: i32 = 50;

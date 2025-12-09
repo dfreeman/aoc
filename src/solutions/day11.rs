@@ -1,17 +1,11 @@
-use std::collections::HashMap;
-
-use aoc::prelude::*;
+use crate::prelude::*;
 use itertools::Itertools;
 use pathfinding::prelude::count_paths;
+use std::collections::HashMap;
 
-solution! {
-  year: 2025,
-  day: 11,
-  parse,
-  part_1,
-  part_2,
-}
+solution!(day = 11);
 
+#[parser]
 fn parse(input: &str) -> HashMap<String, Vec<String>> {
   use parse::*;
 
@@ -22,6 +16,7 @@ fn parse(input: &str) -> HashMap<String, Vec<String>> {
   )))
 }
 
+#[solver(part = 1)]
 fn part_1(data: HashMap<String, Vec<String>>) -> usize {
   count_paths(
     "you".to_string(),
@@ -64,6 +59,7 @@ impl State {
   }
 }
 
+#[solver(part = 2)]
 fn part_2(data: HashMap<String, Vec<String>>) -> usize {
   count_paths(
     ("svr".to_string(), State::Nothing),

@@ -45,7 +45,7 @@ where
 
 impl<T> ParseChars for T
 where
-  T: Parse,
+  T: Parse + std::fmt::Display,
   T::Item: AsChar,
 {
   fn parse_char_grid(self) -> Vec<Vec<char>> {
